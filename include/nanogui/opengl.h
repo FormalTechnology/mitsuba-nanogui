@@ -39,7 +39,9 @@
 #  endif
 #endif // DOXYGEN_SHOULD_SKIP_THIS
 
+#if !defined(NANOGUI_FXPLUG)
 #include <GLFW/glfw3.h>
+#endif
 
 #if defined(NANOGUI_USE_GLES)
 #  if NANOGUI_GLES_VERSION == 2
@@ -49,7 +51,11 @@
 #  endif
 #endif
 
+#if defined(NANOGUI_FXPLUG)
+#include "nanovg.h"
+#else
 #include <nanovg.h>
+#endif
 
 // Special treatment of linux Nvidia opengl headers
 #if !defined(_WIN32) && !defined(__APPLE__) && defined(NANOGUI_USE_OPENGL)

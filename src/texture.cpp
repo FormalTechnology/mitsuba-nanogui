@@ -1,6 +1,10 @@
 #include <nanogui/texture.h>
-#include <stb_image.h>
 #include <memory>
+#if defined(NANOGUI_FXPLUG)
+#include "stb_image.h"
+#else
+#include <stb_image.h>
+#endif
 
 NAMESPACE_BEGIN(nanogui)
 

@@ -52,10 +52,10 @@
 #  include <nanovg_gl.h>
 #  include "opengl_check.h"
 #elif defined(NANOGUI_USE_METAL)
-#  include <nanovg_mtl.h>
+#  include "nanovg_mtl.h"
 #endif
 
-#if defined(__APPLE__)
+#if defined(__APPLE__) && !defined(NANOGUI_FXPLUG)
 #  define GLFW_EXPOSE_NATIVE_COCOA 1
 #  include <GLFW/glfw3native.h>
 #endif
@@ -76,11 +76,14 @@ static bool glad_initialized = false;
 static float get_pixel_ratio(GLFWwindow *window) {
 #if defined(EMSCRIPTEN)
     return emscripten_get_device_pixel_ratio();
+#elif defined(NANOGUI_FXPLUG)
+    return 2.0;
 #else
     float xscale, yscale;
     glfwGetWindowContentScale(window, &xscale, &yscale);
     return xscale;
 #endif
+    
 }
 
 #if defined(EMSCRIPTEN)

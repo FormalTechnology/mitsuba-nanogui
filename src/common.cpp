@@ -52,9 +52,12 @@ void init() {
 
     #if defined(__APPLE__)
         disable_saved_application_state_osx();
-        glfwInitHint(GLFW_COCOA_CHDIR_RESOURCES, GLFW_FALSE);
+        #if !defined(NANOGUI_FXPLUG)
+            glfwInitHint(GLFW_COCOA_CHDIR_RESOURCES, GLFW_FALSE);
+        #endif
     #endif
 
+#if !defined(NANOGUI_FXPLUG)
     glfwSetErrorCallback(
         [](int error, const char *descr) {
             if (error == GLFW_NOT_INITIALIZED)
@@ -65,12 +68,16 @@ void init() {
 
     if (!glfwInit())
         throw std::runtime_error("Could not initialize GLFW!");
-
+#endif
+    
 #if defined(NANOGUI_USE_METAL)
     metal_init();
 #endif
 
+#if !defined(NANOGUI_FXPLUG)
     glfwSetTime(0);
+#endif
+    
 }
 
 static bool mainloop_active = false;
@@ -83,6 +90,7 @@ static float emscripten_refresh = 0;
 std::mutex m_async_mutex;
 std::vector<std::function<void()>> m_async_functions;
 
+#if !defined(NANOGUI_FXPLUG)
 void mainloop(float refresh) {
     if (mainloop_active)
         throw std::runtime_error("Main loop is already running!");
@@ -193,6 +201,7 @@ void mainloop(float refresh) {
 
     refresh_thread.join();
 }
+#endif // !defined NANOGUI_FXPLUG
 
 void async(const std::function<void()> &func) {
     std::lock_guard<std::mutex> guard(m_async_mutex);
@@ -217,7 +226,9 @@ std::pair<bool, bool> test_10bit_edr_support() {
 
 
 void shutdown() {
+#if !defined(NANOGUI_FXPLUG)
     glfwTerminate();
+#endif
 
 #if defined(NANOGUI_USE_METAL)
     metal_shutdown();

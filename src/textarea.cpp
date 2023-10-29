@@ -91,7 +91,9 @@ bool TextArea::keyboard_event(int key, int /* scancode */, int action, int modif
                 else
                     str += m_blocks[i].text;
             }
+#if !defined(NANOGUI_FXPLUG)
             glfwSetClipboardString(screen()->glfw_window(), str.c_str());
+#endif
             return true;
         }
     }

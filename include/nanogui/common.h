@@ -132,6 +132,40 @@ struct GLFWcursor;
 #else
     #define SYSTEM_COMMAND_MOD GLFW_MOD_CONTROL
 #endif
+#if defined(NANOGUI_FXPLUG)
+
+#include <nanogui/fakeglfw.h>
+//#define GLFWwindow void
+//#define GLFWcursor void
+//
+//void glfwInitTimer(void);
+//double glfwGetTime(void);
+//void glfwSetTime(double time);
+//
+//void glfwSetClipboardString(GLFWwindow * w, const char *str);
+//const char * glfwGetClipboardString(GLFWwindow *w);
+//
+//#define GLFW_MOUSE_BUTTON_1 0
+//#define GLFW_MOUSE_BUTTON_2 1
+//
+//#define GLFW_KEY_C                  67
+//#define GLFW_MOD_SUPER           0x0008
+//#define GLFW_PRESS                  1
+//#define GLFW_REPEAT                 2
+//#define GLFW_KEY_LEFT               263
+//#define GLFW_KEY_RIGHT              262
+//#define GLFW_KEY_HOME               268
+//#define GLFW_KEY_END                269
+//#define GLFW_KEY_BACKSPACE          259
+//#define GLFW_KEY_DELETE             261
+//#define GLFW_KEY_ENTER              257
+//#define GLFW_KEY_A                  65
+//#define GLFW_KEY_R                  82
+//#define GLFW_KEY_X                  88
+//#define GLFW_KEY_V                  86
+//
+//#define GLFW_MOD_SHIFT              0x0001
+#endif
 
 NAMESPACE_BEGIN(nanogui)
 
